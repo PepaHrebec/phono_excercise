@@ -5,18 +5,18 @@ import randomWords from "random-words";
 import "./App.css";
 
 function App() {
-  const [word, setWord] = useState("");
+  const [phonoWord, setPhonoWord] = useState("");
+  const [regWord, setRegWord] = useState("");
+  const [letterArr, setLetterArr] = useState<string[]>([]);
   const ipaArr = [
     "p",
     "b",
-    "t",
     "d",
     "k",
     "g",
     "m",
     "n",
     "ŋ",
-    "ʃ",
     "ʒ",
     "f",
     "v",
@@ -48,9 +48,18 @@ function App() {
     "ð",
   ];
 
+  // dangerous: d͡, ˌ,
+
+  const format = (s: string): string => {
+    return s.slice(1, s.length - 1).replaceAll("ɹ", "r");
+  };
+
   const fetchPhono = () => {
     let rand: string[] = randomWords(1);
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${rand[0]}`).then(
+    setRegWord(rand[0]);
+    setLetterArr(Array.from(" ".repeat(rand[0].length)));
+    console.log(letterArr);
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${rand}`).then(
       (res) =>
         res
           .json()
@@ -60,9 +69,9 @@ function App() {
           })
           .then((res) => {
             if ("phonetic" in res) {
-              setWord(res.phonetic);
+              setPhonoWord(format(res.phonetic));
             } else {
-              setWord(res.phonetics[1].text);
+              setPhonoWord(format(res.phonetics[1].text));
             }
           })
     );
@@ -74,8 +83,14 @@ function App() {
 
   return (
     <div className="App">
-      <div>{word}</div>
+      <div>{regWord}</div>
+      <div>{phonoWord}</div>
       <button onClick={fetchPhono}>Click me</button>
+      <div>
+        {letterArr.map((letter) => (
+          <div key={Math.random()}>Hi</div>
+        ))}
+      </div>
       <div>
         {ipaArr.map((sign) => (
           <button key={sign}>{sign}</button>
