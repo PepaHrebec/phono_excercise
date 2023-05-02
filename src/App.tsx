@@ -9,9 +9,7 @@ function App() {
   const [phonoWord, setPhonoWord] = useState("");
   const [regWord, setRegWord] = useState("");
   const [letterArr, setLetterArr] = useState<string[]>([]);
-  const [currLetter, setCurrLetter] = useState(0);
-
-  // dangerous: d͡, ˌ,
+  // const [currLetter, setCurrLetter] = useState(0);
 
   const format = (s: string) => {
     return s
@@ -34,20 +32,21 @@ function App() {
         `https://api.dictionaryapi.dev/api/v2/entries/en/${rand}`
       );
       const objData = await fetchData.json();
+      console.log(objData);
       const objDataFrstArr = objData[0];
       if ("phonetic" in objDataFrstArr) {
         setPhonoWord(format(objDataFrstArr.phonetic));
         setRegWord(rand[0]);
-        setLetterArr(
-          Array.from(" ".repeat(format(objDataFrstArr.phonetic).length))
-        );
+        // setLetterArr(
+        //   Array.from(" ".repeat(format(objDataFrstArr.phonetic).length))
+        // );
         console.log(objDataFrstArr);
       } else {
         setPhonoWord(format(objDataFrstArr.phonetics[1].text));
         setRegWord(rand[0]);
-        setLetterArr(
-          Array.from(" ".repeat(format(objDataFrstArr.phonetics[1]).length))
-        );
+        // setLetterArr(
+        //   Array.from(" ".repeat(format(objDataFrstArr.phonetics[1]).length))
+        // );
         console.log(objDataFrstArr);
       }
     } catch {
@@ -55,23 +54,32 @@ function App() {
     }
   };
 
-  const clickLetterBtn = (e: React.MouseEvent): void => {
-    console.log((e.target as HTMLElement).innerText);
+  const clickLetterBtn = (e: React.MouseEvent) => {
     setLetterArr((prev) => [...prev, (e.target as HTMLElement).innerText]);
-    console.log(letterArr);
+  };
+
+  const clickDeleteBtn = () => {
+    setLetterArr((prev) => [...prev.slice(0, prev.length - 1)]);
   };
 
   useEffect(() => {
     fetchPhono();
   }, []);
 
+  // useEffect(() => {
+  //   console.log(letterArr);
+  // }, [letterArr]);
+
   return (
     <div className="App">
       <div>{regWord}</div>
-      <div>{phonoWord}</div>
+      <div>{letterArr.join("")}</div>
       <button onClick={fetchPhono}>Click me</button>
       <div></div>
-      <Keyboard clickLetterBtn={clickLetterBtn} />
+      <Keyboard
+        clickDeleteBtn={clickDeleteBtn}
+        clickLetterBtn={clickLetterBtn}
+      />
     </div>
   );
 }

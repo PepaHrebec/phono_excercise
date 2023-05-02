@@ -1,8 +1,12 @@
 interface keyboardProps {
   clickLetterBtn: React.MouseEventHandler;
+  clickDeleteBtn: React.MouseEventHandler;
 }
 
-export default function Keyboard({ clickLetterBtn }: keyboardProps) {
+export default function Keyboard({
+  clickLetterBtn,
+  clickDeleteBtn,
+}: keyboardProps) {
   const ipaArr = [
     "p",
     "b",
@@ -50,7 +54,7 @@ export default function Keyboard({ clickLetterBtn }: keyboardProps) {
           {sign}
         </button>
       ))}
-      <button>Remove</button>
+      <button onClick={clickDeleteBtn}>Delete</button>
     </div>
   );
 }
