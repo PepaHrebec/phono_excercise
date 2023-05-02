@@ -14,38 +14,48 @@ function App() {
   // dangerous: d͡, ˌ,
 
   const format = (s: string) => {
-    return s.slice(1, s.length - 1).replaceAll("ɹ", "r");
+    return s
+      .slice(1, s.length - 1)
+      .replaceAll("ɹ", "r")
+      .replaceAll("d͡", "d")
+      .replaceAll("ˌ", "")
+      .replaceAll("ˈ", "")
+      .replaceAll(".", "")
+      .replaceAll("n̩", "ən")
+      .replaceAll("t͡", "t")
+      .replaceAll("l̩", "əl");
   };
 
-  const fetchPhono = () => {
+  const fetchPhono = async () => {
     let rand: string[] = randomWords(1);
-    setRegWord(rand[0]);
 
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${rand}`)
-      .then((res) =>
-        res
-          .json()
-          .then((res) => res[0])
-          .then((res) => {
-            if ("phonetic" in res) {
-              setPhonoWord(format(res.phonetic));
-              setLetterArr(Array.from(" ".repeat(format(res.phonetic).length)));
-              console.log(res);
-            } else {
-              setPhonoWord(format(res.phonetics[1].text));
-              setLetterArr(
-                Array.from(" ".repeat(format(res.phonetics[1]).length))
-              );
-              console.log(res);
-            }
-          })
-      )
-      .catch(() => {
-        fetchPhono();
-      });
+    try {
+      const fetchData = await fetch(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${rand}`
+      );
+      const objData = await fetchData.json();
+      const objDataFrstArr = objData[0];
+      if ("phonetic" in objDataFrstArr) {
+        setPhonoWord(format(objDataFrstArr.phonetic));
+        setRegWord(rand[0]);
+        setLetterArr(
+          Array.from(" ".repeat(format(objDataFrstArr.phonetic).length))
+        );
+        console.log(objDataFrstArr);
+      } else {
+        setPhonoWord(format(objDataFrstArr.phonetics[1].text));
+        setRegWord(rand[0]);
+        setLetterArr(
+          Array.from(" ".repeat(format(objDataFrstArr.phonetics[1]).length))
+        );
+        console.log(objDataFrstArr);
+      }
+    } catch {
+      fetchPhono();
+    }
   };
 
-  const clickBtn = (e: React.MouseEvent): void => {
+  const clickLetterBtn = (e: React.MouseEvent): void => {
     console.log((e.target as HTMLElement).innerText);
     setLetterArr((prev) => [...prev, (e.target as HTMLElement).innerText]);
     console.log(letterArr);
@@ -61,7 +71,7 @@ function App() {
       <div>{phonoWord}</div>
       <button onClick={fetchPhono}>Click me</button>
       <div></div>
-      <Keyboard clickBtn={clickBtn} />
+      <Keyboard clickLetterBtn={clickLetterBtn} />
     </div>
   );
 }

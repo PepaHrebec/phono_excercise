@@ -1,8 +1,8 @@
 interface keyboardProps {
-  clickBtn: React.MouseEventHandler;
+  clickLetterBtn: React.MouseEventHandler;
 }
 
-export default function Keyboard({ clickBtn }: keyboardProps) {
+export default function Keyboard({ clickLetterBtn }: keyboardProps) {
   const ipaArr = [
     "p",
     "b",
@@ -46,7 +46,7 @@ export default function Keyboard({ clickBtn }: keyboardProps) {
   return (
     <div>
       {ipaArr.map((sign) => (
-        <button onClick={clickBtn} key={sign}>
+        <button onClick={clickLetterBtn} key={sign}>
           {sign}
         </button>
       ))}
