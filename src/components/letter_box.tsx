@@ -3,6 +3,6 @@ type letterBoxProps = {
 };
 
 // displays letters entered through keyboard
-export default function letterBox({ innerVal }: letterBoxProps) {
+export default function LetterBox({ innerVal }: letterBoxProps) {
   return <div>{innerVal}</div>;
 }

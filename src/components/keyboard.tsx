@@ -42,7 +42,6 @@ export default function Keyboard({
     "ː",
     "ɑ",
     "ɒ",
-    "ˈ",
     "r",
     "ð",
   ];
