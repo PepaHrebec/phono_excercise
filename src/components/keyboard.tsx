@@ -1,3 +1,5 @@
+import { keyButton } from "./keyboard.css.ts";
+
 interface keyboardProps {
   clickLetterBtn: React.MouseEventHandler;
   clickDeleteBtn: React.MouseEventHandler;
@@ -50,11 +52,13 @@ export default function Keyboard({
   return (
     <div>
       {ipaArr.map((sign) => (
-        <button onClick={clickLetterBtn} key={sign}>
+        <button onClick={clickLetterBtn} key={sign} className={keyButton}>
           {sign}
         </button>
       ))}
-      <button onClick={clickDeleteBtn}>Delete</button>
+      <button onClick={clickDeleteBtn} className={keyButton}>
+        Delete
+      </button>
     </div>
   );
 }
