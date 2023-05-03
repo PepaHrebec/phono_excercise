@@ -4,6 +4,7 @@ import "./App.css";
 import LetterBox from "./components/letter_box";
 import wordBox from "./components/word_box";
 import Keyboard from "./components/keyboard";
+import { container } from "./App.css.ts";
 
 type phonoGroup = {
   text: string;
@@ -13,6 +14,7 @@ type phonoGroup = {
 function App() {
   const ref = useRef<string[]>([]);
   const [regWord, setRegWord] = useState("");
+  const [phonoState, setPhonoState] = useState<"" | "corr" | "false">("");
   const [letterArr, setLetterArr] = useState<string[]>([]);
 
   const format = (s: string) => {
@@ -26,12 +28,16 @@ function App() {
       .replaceAll("n̩", "ən")
       .replaceAll("t͡", "t")
       .replaceAll("l̩", "əl")
-      .replaceAll("ɝ", "er");
+      .replaceAll("ɝ", "er")
+      .replaceAll("ɚ", "er")
+      .replaceAll("ɾ", "t")
+      .replaceAll("ʰ", "");
   };
 
   const fetchPhono = async () => {
     ref.current = [];
     setLetterArr([]);
+    setPhonoState("");
 
     let rand: string[] = randomWords(1);
     setRegWord(rand[0]);
@@ -54,9 +60,22 @@ function App() {
       } else {
         fetchPhono();
       }
+      console.log(ref.current);
     } catch {
       fetchPhono();
     }
+  };
+
+  // compares user transcription to the correct ones
+  const checkPhono = () => {
+    let flag = false;
+    ref.current.forEach((transcrip) => {
+      if (transcrip === letterArr.join("")) {
+        setPhonoState("corr");
+        flag = true;
+      }
+    });
+    flag === false ? setPhonoState("false") : null;
   };
 
   // adds a letter to the user transcription
@@ -73,19 +92,21 @@ function App() {
     fetchPhono();
   }, []);
 
-  // useEffect(() => {
-  //   console.log(letterArr);
-  // }, [letterArr]);
+  useEffect(() => {
+    console.log(letterArr);
+  }, [letterArr]);
 
   return (
     <div className="App">
-      <div>{regWord}</div>
+      <div className={container}>{regWord}</div>
       <LetterBox innerVal={`${letterArr.join("")}`} />
-      <button onClick={fetchPhono}>Click me</button>
+      <button onClick={fetchPhono}>New Word</button>
+      <button onClick={checkPhono}>Check</button>
       <Keyboard
         clickDeleteBtn={clickDeleteBtn}
         clickLetterBtn={clickLetterBtn}
       />
+      <div>{phonoState}</div>
     </div>
   );
 }
