@@ -4,6 +4,7 @@ export default function ResponseBox({ state }: { state: string }) {
   return (
     <div
       className={state === "Wrong" ? responses["wrong"] : responses["correct"]}
+      key={state}
     >
       {state}
     </div>

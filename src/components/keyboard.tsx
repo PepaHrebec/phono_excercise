@@ -9,56 +9,67 @@ export default function Keyboard({
   clickLetterBtn,
   clickDeleteBtn,
 }: keyboardProps) {
-  const ipaArr = [
+  const consArr = [
     "p",
     "b",
+    "t",
     "d",
     "k",
     "g",
     "m",
     "n",
     "ŋ",
-    "ʒ",
     "f",
     "v",
     "θ",
+    "ð",
     "s",
-    "z",
     "ʃ",
+    "z",
+    "ʒ",
     "h",
     "w",
     "j",
     "l",
+    "r",
+  ];
+  const vowelArr = [
     "i",
-    "u",
     "ɪ",
     "ʊ",
+    "u",
     "e",
-    "ɛ",
-    "o",
+    "ɜ",
     "ə",
+    "ɔ",
+    "o",
     "ʌ",
     "æ",
     "a",
-    "ɔ",
-    "ː",
     "ɑ",
     "ɒ",
-    "t",
-    "r",
-    "ð",
+    "ː",
   ];
 
   return (
     <div>
-      {ipaArr.map((sign) => (
-        <button onClick={clickLetterBtn} key={sign} className={keyButton}>
-          {sign}
+      <div>
+        {vowelArr.map((sign) => (
+          <button onClick={clickLetterBtn} key={sign} className={keyButton}>
+            {sign}
+          </button>
+        ))}
+      </div>
+      <div>
+        {consArr.map((sign) => (
+          <button onClick={clickLetterBtn} key={sign} className={keyButton}>
+            {sign}
+          </button>
+        ))}
+        <button onClick={clickDeleteBtn} className={delButton}>
+          Delete
         </button>
-      ))}
-      <button onClick={clickDeleteBtn} className={delButton}>
-        Delete
-      </button>
+      </div>
     </div>
   );
 }

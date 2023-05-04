@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import randomWords from "random-words";
 import "./App.css";
-import LetterBox from "./components/letter-box.tsx";
-import WordBox from "./components/word-box.tsx";
+import LetterBox from "./components/letter-box";
+import WordBox from "./components/word-box";
 import Keyboard from "./components/keyboard";
-import { btns } from "./App.css.ts";
-import ResponseBox from "./components/response.tsx";
+import { btns, mainWrap } from "./App.css.ts";
+import ResponseBox from "./components/response";
 
-type phonoGroup = {
+interface phonoGroup {
   text: string;
   audio: string;
-};
+}
 
 function App() {
   const ref = useRef<string[]>([]);
@@ -32,7 +32,9 @@ function App() {
       .replaceAll("ɝ", "er")
       .replaceAll("ɚ", "er")
       .replaceAll("ɾ", "t")
-      .replaceAll("ʰ", "");
+      .replaceAll("ʰ", "")
+      .replaceAll("ɛ", "ɜ")
+      .replace(/ɜ(?!ː)/, "e");
   };
 
   const fetchPhono = async () => {
@@ -111,7 +113,7 @@ function App() {
   }, [letterArr]);
 
   return (
-    <div className="App">
+    <div className={mainWrap}>
       <WordBox innerVal={regWord} />
       <LetterBox innerVal={`${letterArr.join("")}`} />
       <button onClick={fetchPhono} className={btns["new"]}>
