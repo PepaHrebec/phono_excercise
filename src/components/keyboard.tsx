@@ -1,4 +1,4 @@
-import { keyButton } from "./keyboard.css.ts";
+import { keyButton, delButton } from "./keyboard.css";
 
 interface keyboardProps {
   clickLetterBtn: React.MouseEventHandler;
@@ -56,7 +56,7 @@ export default function Keyboard({
           {sign}
         </button>
       ))}
-      <button onClick={clickDeleteBtn} className={keyButton}>
+      <button onClick={clickDeleteBtn} className={delButton}>
         Delete
       </button>
     </div>

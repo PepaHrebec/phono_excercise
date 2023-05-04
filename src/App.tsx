@@ -4,7 +4,7 @@ import "./App.css";
 import LetterBox from "./components/letter_box";
 import wordBox from "./components/word_box";
 import Keyboard from "./components/keyboard";
-import { newWordBtn } from "./App.css.ts";
+import { btns } from "./App.css.ts";
 
 type phonoGroup = {
   text: string;
@@ -100,10 +100,12 @@ function App() {
     <div className="App">
       <div>{regWord}</div>
       <LetterBox innerVal={`${letterArr.join("")}`} />
-      <button onClick={fetchPhono} className={newWordBtn}>
+      <button onClick={fetchPhono} className={btns["new"]}>
         New Word
       </button>
-      <button onClick={checkPhono}>Check</button>
+      <button onClick={checkPhono} className={btns["check"]}>
+        Check
+      </button>
       <Keyboard
         clickDeleteBtn={clickDeleteBtn}
         clickLetterBtn={clickLetterBtn}
