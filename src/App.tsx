@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import randomWords from "random-words";
 import "./App.css";
-import LetterBox from "./components/letter_box";
-import wordBox from "./components/word_box";
+import LetterBox from "./components/letter-box.tsx";
+import WordBox from "./components/word-box.tsx";
 import Keyboard from "./components/keyboard";
 import { btns } from "./App.css.ts";
 
@@ -98,7 +98,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>{regWord}</div>
+      <WordBox innerVal={regWord} />
       <LetterBox innerVal={`${letterArr.join("")}`} />
       <button onClick={fetchPhono} className={btns["new"]}>
         New Word

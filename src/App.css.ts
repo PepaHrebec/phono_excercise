@@ -1,18 +1,4 @@
-import {
-  style,
-  globalStyle,
-  styleVariants,
-  createTheme,
-} from "@vanilla-extract/css";
-
-// const [themeClass, vars] = createTheme({
-//   backg: {
-//     classic: "#24282e",
-//   },
-//   text: {
-//     classic: "#bec1c9",
-//   },
-// });
+import { style, styleVariants } from "@vanilla-extract/css";
 
 const base = style({
   backgroundColor: "#24282e",
