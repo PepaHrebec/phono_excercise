@@ -4,9 +4,11 @@ export const keyButton = style({
   backgroundColor: "#24282e",
   margin: "6px",
   color: "#bec1c9",
-  transition: "box-shadow 0.25s",
+  transition: "all 0.25s",
+  minWidth: "3.2em",
   ":hover": { boxShadow: "0 0 2px 1px #bec1c9" },
   ":focus": { boxShadow: "0 0 2px 1px #bec1c9" },
+  ":active": { transform: "scale(0.95)" },
 });
 
 export const delButton = style([

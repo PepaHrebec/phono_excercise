@@ -5,6 +5,7 @@ import LetterBox from "./components/letter-box.tsx";
 import WordBox from "./components/word-box.tsx";
 import Keyboard from "./components/keyboard";
 import { btns } from "./App.css.ts";
+import ResponseBox from "./components/response.tsx";
 
 type phonoGroup = {
   text: string;
@@ -14,7 +15,7 @@ type phonoGroup = {
 function App() {
   const ref = useRef<string[]>([]);
   const [regWord, setRegWord] = useState("");
-  const [phonoState, setPhonoState] = useState<"" | "corr" | "false">("");
+  const [phonoState, setPhonoState] = useState<"" | "Correct!" | "Wrong">("");
   const [letterArr, setLetterArr] = useState<string[]>([]);
 
   const format = (s: string) => {
@@ -55,7 +56,20 @@ function App() {
       // API object sometimes doesn't contain transcriptions
       if ("phonetics" in validData) {
         validData.phonetics.map((group: phonoGroup) => {
-          ref.current = [...ref.current, format(group.text)];
+          // sometimes hides two answers behind brackets
+          if (group.text.includes("(")) {
+            const longerText = group.text.replace(/\(|\)/g, "");
+            const shorterText =
+              group.text.slice(0, group.text.indexOf("(")) +
+              group.text.slice(group.text.indexOf(")") + 1, group.text.length);
+            ref.current = [
+              ...ref.current,
+              format(longerText),
+              format(shorterText),
+            ];
+          } else {
+            ref.current = [...ref.current, format(group.text)];
+          }
         });
       } else {
         fetchPhono();
@@ -71,11 +85,11 @@ function App() {
     let flag = false;
     ref.current.forEach((transcrip) => {
       if (transcrip === letterArr.join("")) {
-        setPhonoState("corr");
+        setPhonoState("Correct!");
         flag = true;
       }
     });
-    flag === false ? setPhonoState("false") : null;
+    flag === false ? setPhonoState("Wrong") : null;
   };
 
   // adds a letter to the user transcription
@@ -110,7 +124,7 @@ function App() {
         clickDeleteBtn={clickDeleteBtn}
         clickLetterBtn={clickLetterBtn}
       />
-      <div>{phonoState}</div>
+      {phonoState.length > 0 ? <ResponseBox state={phonoState} /> : null}
     </div>
   );
 }

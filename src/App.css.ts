@@ -4,7 +4,8 @@ const base = style({
   backgroundColor: "#24282e",
   margin: "4px",
   color: "#bec1c9",
-  transition: "box-shadow 0.25s",
+  transition: "all 0.25s",
+  ":active": { transform: "scale(0.95)" },
 });
 
 export const btns = styleVariants({
