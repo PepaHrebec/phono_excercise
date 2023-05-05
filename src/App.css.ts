@@ -5,6 +5,13 @@ const base = style({
   margin: "4px",
   color: "#bec1c9",
   transition: "all 0.25s",
+  minWidth: "3.2em",
+  borderRadius: "8px",
+  padding: "0.6em 1.2em",
+  fontSize: "1em",
+  fontFamily: "inherit",
+  cursor: "pointer",
+  border: "none",
   ":active": { transform: "scale(0.95)" },
 });
 

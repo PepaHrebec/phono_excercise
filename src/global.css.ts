@@ -10,4 +10,10 @@ globalStyle(`*`, {
 
 globalStyle("body", {
   backgroundColor: "#181a1f",
+  height: "100vh",
+  textAlign: "center",
+  margin: "0 auto",
+  padding: "6px",
+  display: "flex",
+  alignItems: "center",
 });

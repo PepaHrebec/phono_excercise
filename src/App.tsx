@@ -1,10 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import randomWords from "random-words";
-import "./App.css";
 import LetterBox from "./components/letter-box";
 import WordBox from "./components/word-box";
 import Keyboard from "./components/keyboard";
-import { btns, mainWrap } from "./App.css.ts";
+import { btns, mainWrap } from "./App.css";
 import ResponseBox from "./components/response";
 
 interface phonoGroup {
@@ -13,7 +12,7 @@ interface phonoGroup {
 }
 
 function App() {
-  const ref = useRef<string[]>([]);
+  const [corrTranscr, setCorrTranscr] = useState<string[]>([]);
   const [regWord, setRegWord] = useState("");
   const [phonoState, setPhonoState] = useState<"" | "Correct!" | "Wrong">("");
   const [letterArr, setLetterArr] = useState<string[]>([]);
@@ -38,7 +37,7 @@ function App() {
   };
 
   const fetchPhono = async () => {
-    ref.current = [];
+    setCorrTranscr([]);
     setLetterArr([]);
     setPhonoState("");
 
@@ -64,19 +63,21 @@ function App() {
             const shorterText =
               group.text.slice(0, group.text.indexOf("(")) +
               group.text.slice(group.text.indexOf(")") + 1, group.text.length);
-            ref.current = [
-              ...ref.current,
+            setCorrTranscr((prev) => [
+              ...prev,
               format(longerText),
               format(shorterText),
-            ];
+            ]);
           } else {
-            ref.current = [...ref.current, format(group.text)];
+            setCorrTranscr((prev) => [...prev, format(group.text)]);
           }
         });
+
+        // gets rid of accidental duplicates
+        setCorrTranscr((prevTranscr) => checkMultiples(prevTranscr));
       } else {
         fetchPhono();
       }
-      console.log(ref.current);
     } catch {
       fetchPhono();
     }
@@ -85,7 +86,7 @@ function App() {
   // compares user transcription to the correct ones
   const checkPhono = () => {
     let flag = false;
-    ref.current.forEach((transcrip) => {
+    corrTranscr.forEach((transcrip) => {
       if (transcrip === letterArr.join("")) {
         setPhonoState("Correct!");
         flag = true;
@@ -102,6 +103,18 @@ function App() {
   // deletes the last letter of the user transcription
   const clickDeleteBtn = () => {
     setLetterArr((prev) => [...prev.slice(0, prev.length - 1)]);
+  };
+
+  // transcriptions sometimes contain duplicates
+  const checkMultiples = (origArr: string[]) => {
+    const rtrnArr: string[] = [];
+    origArr.forEach((word) => {
+      if (!rtrnArr.includes(word)) {
+        rtrnArr[rtrnArr.length] = word;
+      }
+    });
+    console.log(rtrnArr);
+    return rtrnArr;
   };
 
   useEffect(() => {

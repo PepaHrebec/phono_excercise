@@ -1,4 +1,4 @@
-import { wordBox } from "./word-box.css.ts";
+import { wordBox } from "./word-box.css";
 
 type wordBoxProps = {
   innerVal: string;

@@ -14,7 +14,7 @@ const base = style({
   borderRadius: "8px",
   margin: "0 auto",
   position: "absolute",
-  bottom: -100,
+  bottom: "-15%",
   left: "50%",
   transform: "translateX(-50%)",
   animationName: intro,
