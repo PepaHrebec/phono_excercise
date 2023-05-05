@@ -13,6 +13,7 @@ interface phonoGroup {
 
 function App() {
   const [corrTranscr, setCorrTranscr] = useState<string[]>([]);
+  const [showRes, setShowRes] = useState(false);
   const [regWord, setRegWord] = useState("");
   const [phonoState, setPhonoState] = useState<"" | "Correct!" | "Wrong">("");
   const [letterArr, setLetterArr] = useState<string[]>([]);
@@ -40,6 +41,7 @@ function App() {
     setCorrTranscr([]);
     setLetterArr([]);
     setPhonoState("");
+    setShowRes(false);
 
     let rand: string[] = randomWords(1);
     setRegWord(rand[0]);
@@ -128,12 +130,22 @@ function App() {
   return (
     <div className={mainWrap}>
       <WordBox innerVal={regWord} />
-      <LetterBox innerVal={`${letterArr.join("")}`} />
+      <LetterBox
+        innerVal={
+          showRes === false ? `${letterArr.join("")}` : corrTranscr.join(", ")
+        }
+      />
       <button onClick={fetchPhono} className={btns["new"]}>
         New Word
       </button>
       <button onClick={checkPhono} className={btns["check"]}>
         Check
+      </button>
+      <button
+        onClick={() => setShowRes((prev) => !prev)}
+        className={btns["res"]}
+      >
+        Results/Typing
       </button>
       <Keyboard
         clickDeleteBtn={clickDeleteBtn}

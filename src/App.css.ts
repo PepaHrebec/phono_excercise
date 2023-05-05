@@ -32,6 +32,14 @@ export const btns = styleVariants({
       ":focus": { boxShadow: "0 0 2px 1px #ec9706" },
     },
   ],
+  res: [
+    base,
+    {
+      border: "solid 2px #636cff",
+      ":hover": { boxShadow: "0 0 2px 1px #636cff" },
+      ":focus": { boxShadow: "0 0 2px 1px #636cff" },
+    },
+  ],
 });
 
 export const mainWrap = style({

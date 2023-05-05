@@ -2,7 +2,7 @@ import { style } from "@vanilla-extract/css";
 
 export const keyButton = style({
   backgroundColor: "#24282e",
-  margin: "6px",
+  margin: "4px",
   color: "#bec1c9",
   transition: "all 0.25s",
   minWidth: "3.2em",
