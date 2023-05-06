@@ -95,7 +95,7 @@ function App() {
   const checkPhono = () => {
     let flag = false;
     corrTranscr.forEach((transcrip) => {
-      if (transcrip === letterArr.join("")) {
+      if (transcrip.normalize() === letterArr.join("").normalize()) {
         setPhonoState("Correct!");
         flag = true;
         console.log(`${transcrip} = ${letterArr.join("")}`);
