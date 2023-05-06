@@ -44,4 +44,5 @@ export const btns = styleVariants({
 
 export const mainWrap = style({
   position: "relative",
+  maxWidth: "1024px",
 });

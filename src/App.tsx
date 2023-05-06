@@ -44,7 +44,6 @@ function App() {
     setShowRes(false);
 
     let rand: string[] = randomWords(1);
-    setRegWord(rand[0]);
 
     try {
       // randomWords sometimes generates a word without an entry
@@ -57,7 +56,14 @@ function App() {
       const validData = objData[0];
 
       // API object sometimes doesn't contain transcriptions
-      if ("phonetics" in validData) {
+      if (
+        "phonetics" in validData &&
+        validData.phonetics.length > 0 &&
+        "text" in validData.phonetics[0]
+      ) {
+        // show the fetched word only if it is correct
+        setRegWord(rand[0]);
+
         validData.phonetics.map((group: phonoGroup) => {
           // sometimes hides two answers behind brackets
           if (group.text.includes("(")) {
@@ -92,6 +98,9 @@ function App() {
       if (transcrip === letterArr.join("")) {
         setPhonoState("Correct!");
         flag = true;
+        console.log(`${transcrip} = ${letterArr.join("")}`);
+      } else {
+        console.log(`${transcrip} =/= ${letterArr.join("")}`);
       }
     });
     flag === false ? setPhonoState("Wrong") : null;

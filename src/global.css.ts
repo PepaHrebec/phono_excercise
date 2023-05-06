@@ -17,3 +17,7 @@ globalStyle("body", {
   display: "flex",
   alignItems: "center",
 });
+
+globalStyle("#root", {
+  margin: "0 auto",
+});
