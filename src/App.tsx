@@ -92,10 +92,19 @@ function App() {
   };
 
   // compares user transcription to the correct ones
+  // replaceAll() because of the "g" issue
   const checkPhono = () => {
     let flag = false;
     corrTranscr.forEach((transcrip) => {
-      if (transcrip.normalize() === letterArr.join("").normalize()) {
+      if (
+        transcrip.replaceAll(
+          String.fromCharCode(103),
+          String.fromCharCode(609)
+        ) ===
+        letterArr
+          .join("")
+          .replaceAll(String.fromCharCode(103), String.fromCharCode(609))
+      ) {
         setPhonoState("Correct!");
         flag = true;
         console.log(`${transcrip} = ${letterArr.join("")}`);
