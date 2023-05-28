@@ -34,7 +34,9 @@ function App() {
       .replaceAll("ɾ", "t")
       .replaceAll("ʰ", "")
       .replaceAll("ɛ", "ɜ")
-      .replace(/ɜ(?!ː)/, "e");
+      .replace(/ɜ(?!ː)/, "e")
+      .replaceAll("oʊ", "əʊ")
+      .replaceAll("oː", "ɔː");
   };
 
   const fetchPhono = async () => {

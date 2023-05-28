@@ -1,11 +1,12 @@
 import { keyButton, delButton } from "./keyboard.css";
+import { memo } from "react";
 
 interface keyboardProps {
   clickLetterBtn: React.MouseEventHandler;
   clickDeleteBtn: React.MouseEventHandler;
 }
 
-export default function Keyboard({
+export default memo(function Keyboard({
   clickLetterBtn,
   clickDeleteBtn,
 }: keyboardProps) {
@@ -42,12 +43,11 @@ export default function Keyboard({
     "ɜ",
     "ə",
     "ɔ",
-    "o",
+    "ɒ",
     "ʌ",
     "æ",
     "a",
     "ɑ",
-    "ɒ",
     "ː",
   ];
 
@@ -72,4 +72,4 @@ export default function Keyboard({
       </div>
     </div>
   );
-}
+});
