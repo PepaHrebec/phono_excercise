@@ -12,7 +12,14 @@ export const wordBox = style({
   color: "#636cff",
   fontSize: "2em",
   letterSpacing: "4px",
-  marginBottom: "20px",
   animationName: drop,
   animationDuration: "1.2s",
+});
+
+export const wordBoxWrap = style({
+  height: "70px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
 });

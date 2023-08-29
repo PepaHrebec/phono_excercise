@@ -1,4 +1,4 @@
-import { wordBox } from "./word-box.css";
+import { wordBox, wordBoxWrap } from "./word-box.css";
 
 type wordBoxProps = {
   innerVal: string;
@@ -7,8 +7,10 @@ type wordBoxProps = {
 // displays the fetched word
 export default function WordBox({ innerVal }: wordBoxProps) {
   return (
-    <div className={wordBox} key={innerVal}>
-      {innerVal.toUpperCase()}
+    <div className={wordBoxWrap}>
+      <div className={wordBox} key={innerVal}>
+        {innerVal.toUpperCase()}
+      </div>
     </div>
   );
 }
