@@ -1,4 +1,4 @@
-import { keyButton, delButton } from "./keyboard.css";
+import { keyButton, delButton, keyboard } from "./keyboard.css";
 import { memo } from "react";
 
 interface keyboardProps {
@@ -6,53 +6,53 @@ interface keyboardProps {
   clickDeleteBtn: React.MouseEventHandler;
 }
 
+const consArr = [
+  "p",
+  "b",
+  "t",
+  "d",
+  "k",
+  "g",
+  "m",
+  "n",
+  "ŋ",
+  "f",
+  "v",
+  "θ",
+  "ð",
+  "s",
+  "ʃ",
+  "z",
+  "ʒ",
+  "h",
+  "w",
+  "j",
+  "l",
+  "r",
+];
+const vowelArr = [
+  "i",
+  "ɪ",
+  "ʊ",
+  "u",
+  "e",
+  "ɜ",
+  "ə",
+  "ɔ",
+  "ɒ",
+  "ʌ",
+  "æ",
+  "a",
+  "ɑ",
+  "ː",
+];
+
 export default memo(function Keyboard({
   clickLetterBtn,
   clickDeleteBtn,
 }: keyboardProps) {
-  const consArr = [
-    "p",
-    "b",
-    "t",
-    "d",
-    "k",
-    "g",
-    "m",
-    "n",
-    "ŋ",
-    "f",
-    "v",
-    "θ",
-    "ð",
-    "s",
-    "ʃ",
-    "z",
-    "ʒ",
-    "h",
-    "w",
-    "j",
-    "l",
-    "r",
-  ];
-  const vowelArr = [
-    "i",
-    "ɪ",
-    "ʊ",
-    "u",
-    "e",
-    "ɜ",
-    "ə",
-    "ɔ",
-    "ɒ",
-    "ʌ",
-    "æ",
-    "a",
-    "ɑ",
-    "ː",
-  ];
-
   return (
-    <div>
+    <div className={keyboard}>
       <div>
         {vowelArr.map((sign) => (
           <button onClick={clickLetterBtn} key={sign} className={keyButton}>

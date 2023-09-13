@@ -6,7 +6,7 @@ const base = style({
   color: "#bec1c9",
   transition: "all 0.25s",
   minWidth: "3.2em",
-  borderRadius: "8px",
+  borderRadius: "6px",
   padding: "0.6em 1.2em",
   fontSize: "1em",
   fontFamily: "inherit",

@@ -6,9 +6,9 @@ export const keyButton = style({
   color: "#bec1c9",
   transition: "all 0.25s",
   minWidth: "3.2em",
-  borderRadius: "8px",
-  padding: "0.6em 1.2em",
-  fontSize: "1em",
+  borderRadius: "6px",
+  padding: "0.3em 0.6em",
+  fontSize: "0.8em",
   fontFamily: "inherit",
   cursor: "pointer",
   border: "none",
@@ -25,3 +25,8 @@ export const delButton = style([
     ":focus": { boxShadow: "0 0 2px 1px #b90e0a" },
   },
 ]);
+
+export const keyboard = style({
+  width: "clamp(20em, 60%, 40em)",
+  margin: "0 auto",
+});

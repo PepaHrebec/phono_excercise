@@ -33,7 +33,9 @@ export const useCheckPhono = (): [
         console.log(`${transcrip} =/= ${inputArr.join("")}`);
       }
     });
-    flag === false ? setPhonoState("Wrong") : null;
+    if (flag === false) {
+      setPhonoState("Wrong");
+    }
   };
 
   const resetPhonoState = () => {

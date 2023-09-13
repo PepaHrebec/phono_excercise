@@ -25,11 +25,13 @@ function App() {
 
   useEffect(() => {
     hookFoo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     console.log("Hook -", fetchedWord, fetchedTranscripts);
     resetPhonoState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchedWord]);
 
   return (

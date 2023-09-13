@@ -36,7 +36,7 @@ export const useFetchPhono = (): [string, string[], () => Promise<void>] => {
         // show the fetched word only if it is correct
         setRegWord(rand[0]);
 
-        validData.phonetics.map((group: phonoGroup) => {
+        validData.phonetics.forEach((group: phonoGroup) => {
           // sometimes hides two answers behind brackets
           if (group.text.includes("(")) {
             const longerText = group.text.replace(/\(|\)/g, "");
